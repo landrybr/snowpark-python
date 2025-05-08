@@ -1004,6 +1004,8 @@ def _parse_datatype_json_value(json_value: Union[dict, str]) -> DataType:
         elif _FIXED_VECTOR_PATTERN.match(json_value):
             m = _FIXED_VECTOR_PATTERN.match(json_value)
             return VectorType(m.group(1), int(m.group(2)))  # type: ignore[union-attr]
+        elif json_value == "variant":
+            return VariantType()
         else:
             raise ValueError(f"Cannot parse data type: {str(json_value)}")
     else:
